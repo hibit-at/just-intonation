@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>純正律アプリ</title>
+    <style>
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .component {
+            margin: 10px;
+            flex: 1 1 calc(50% - 20px);
+            /* 2列に分ける */
+            box-sizing: border-box;
+        }
+        
+        .component label {
+            display: block;
+        }
+        
+        .component input[type="number"] {
+            width: 100px;
+        }
+        
+        .playing {
+            background-color: green;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>純正律比較アプリ</h1>
+    <div class="container" id="components"></div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
