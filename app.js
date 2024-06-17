@@ -3,19 +3,35 @@ const context = new (window.AudioContext || window.webkitAudioContext)();
 let oscillators = {};
 let gainNodes = {};
 
+// プリセットデータ
+const presets = [
+    { frequency: 400, semitone: 0, volume: 0.5 },   // 左列 i=0
+    { frequency: 400, semitone: 0, volume: 0.5 },   // 右列 i=1
+    { frequency: 400, semitone: 4, volume: 0.5 },   // 左列 i=2
+    { frequency: 500, semitone: 0, volume: 0.5 },   // 右列 i=3
+    { frequency: 400, semitone: 7, volume: 0.5 },   // 左列 i=4
+    { frequency: 600, semitone: 0, volume: 0.5 },   // 右列 i=5
+    { frequency: 400, semitone: 10, volume: 0.2 },  // 左列 i=6
+    { frequency: 700, semitone: 0, volume: 0.2 },   // 右列 i=7
+    { frequency: 400, semitone: 18, volume: 0.2 },  // 左列 i=8
+    { frequency: 1100, semitone: 0, volume: 0.2 }   // 右列 i=9
+];
+
 const createComponent = (id) => {
     const component = document.createElement('div');
     component.className = 'component';
     
+    const preset = presets[id];
+    
     component.innerHTML = `
         <label for="frequency${id}">ヘルツ:</label>
-        <input type="number" id="frequency${id}" value="400" oninput="updateFrequency(${id})">
+        <input type="number" id="frequency${id}" value="${preset.frequency}" oninput="updateFrequency(${id})">
         <label for="semitone${id}">平均律での半音補正:</label>
         <button onclick="adjustSemitone(${id}, -1)">-</button>
-        <input type="number" id="semitone${id}" value="0">
+        <input type="number" id="semitone${id}" value="${preset.semitone}">
         <button onclick="adjustSemitone(${id}, 1)">+</button>
         <label for="volume${id}">音量:</label>
-        <input type="range" id="volume${id}" min="0" max="1" step="0.01" value="0.5" oninput="updateVolume(${id})">
+        <input type="range" id="volume${id}" min="0" max="1" step="0.01" value="${preset.volume}" oninput="updateVolume(${id})">
         <button id="play${id}" onclick="play(${id})">再生</button>
         <button onclick="stop(${id})">停止</button>
     `;
